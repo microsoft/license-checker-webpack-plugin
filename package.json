@@ -1,0 +1,41 @@
+{
+  "name": "license-checker-webpack-plugin",
+  "description": "Verifies licenses of all external dependencies in a compilation, and outputs them to a file.",
+  "version": "0.0.1",
+  "license": "MIT",
+  "author": {
+    "name": "Daniel Perez Alvarez",
+    "email": "unindented@gmail.com",
+    "url": "http://unindented.org/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/unindented/license-checker-webpack-plugin.git"
+  },
+  "keywords": [
+    "license",
+    "webpack"
+  ],
+  "main": "src/index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "peerDependencies": {
+    "webpack": "^4.0.0"
+  },
+  "dependencies": {
+    "minimatch": "^3.0.4",
+    "semver": "^5.5.0",
+    "spdx-expression-validate": "^1.0.2",
+    "spdx-satisfies": "^4.0.0",
+    "webpack-sources": "^1.1.0"
+  },
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-plugin-prettier": "^2.6.0",
+    "lodash.template": "^4.4.0",
+    "prettier": "^1.13.5",
+    "jest": "^23.1.0",
+    "webpack": "^4.12.0"
+  }
+}

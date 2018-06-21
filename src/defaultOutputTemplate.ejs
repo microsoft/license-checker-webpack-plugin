@@ -1,0 +1,9 @@
+THIRD-PARTY SOFTWARE NOTICES AND INFORMATION
+
+<% dependencies.forEach(dep => { %>
+--------------------------------------------------------------------------------
+<%= dep.name %> v<%= dep.version %><%= dep.author ? ` - ${dep.author}` : '' %><%= dep.repository ? `\n${dep.repository}` : '' %>
+--------------------------------------------------------------------------------
+
+<%= dep.licenseText || dep.licenseName %>
+<% }) %>
