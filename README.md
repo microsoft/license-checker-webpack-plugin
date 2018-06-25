@@ -75,7 +75,7 @@ Here's an example `webpack.config.js` file that uses all options:
 const LicenseCheckerWebpackPlugin = require("license-checker-webpack-plugin");
 const template = require("lodash.template");
 
-const customTemplate = templaet(readFileSync("customTemplate.ejs"));
+const customTemplate = template(readFileSync("customTemplate.ejs"));
 
 module.exports = {
   // ...
