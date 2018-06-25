@@ -35,7 +35,6 @@ class LicenseCheckerWebpackPlugin {
       }
 
       const sortedLicenseInformation = getSortedLicenseInformation(licenseInformation);
-      console.log(JSON.stringify(sortedLicenseInformation, null, 2));
       compilation.assets[outputFilename] = new RawSource(outputWriter(sortedLicenseInformation));
     });
   }
