@@ -31,14 +31,14 @@ module.exports = {
 
 ## Options
 
-| Property         | Type       | Default                                                    | Description                                                                                                                                                       |
-| ---------------- | ---------- | ---------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `allow`          | `string`   | `"(Apache-2.0 OR BSD-2-Clause OR BSD-3-Clause OR MIT)"`    | SPDX expression with allowed licenses.                                                                                                                            |
-| `ignore`         | `array`    | `[]`                                                       | Array of dependencies to ignore, in the format `["<dependency name>@<version range>"]`. For example, `["assignment@^2.0.0"]`.                                     |
-| `override`       | `object`   | `{}`                                                       | Object of dependencies to override, in the format `{"<dependency name>@<version range>": { ... }}`. For example, `{"assignment@^2.0.0": { licenseName: "MIT" }}`. |
-| `emitError`      | `boolean`  | `false`                                                    | Whether to emit errors instead of warnings.                                                                                                                       |
-| `outputWriter`   | `function` | See [`defaultOutputWriter`](./src/defaultOutputWriter.js). | Function that will generate the contents of the third-party notices file.                                                                                         |
-| `outputFilename` | `string`   | `"ThirdPartyNotices.txt"`                                  | Name of the third-party notices file with all licensing information.                                                                                              |
+| Property         | Type                   | Default                                                    | Description                                                                                                                                                       |
+| ---------------- | ---------------------- | ---------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `allow`          | `string`               | `"(Apache-2.0 OR BSD-2-Clause OR BSD-3-Clause OR MIT)"`    | SPDX expression with allowed licenses.                                                                                                                            |
+| `ignore`         | `array`                | `[]`                                                       | Array of dependencies to ignore, in the format `["<dependency name>@<version range>"]`. For example, `["assignment@^2.0.0"]`.                                     |
+| `override`       | `object`               | `{}`                                                       | Object of dependencies to override, in the format `{"<dependency name>@<version range>": { ... }}`. For example, `{"assignment@^2.0.0": { licenseName: "MIT" }}`. |
+| `emitError`      | `boolean`              | `false`                                                    | Whether to emit errors instead of warnings.                                                                                                                       |
+| `outputWriter`   | `string` or `function` | See [`defaultOutputWriter`](./src/defaultOutputWriter.js). | Path to a `.ejs` template, or function that will generate the contents of the third-party notices file.                                                           |
+| `outputFilename` | `string`               | `"ThirdPartyNotices.txt"`                                  | Name of the third-party notices file with all licensing information.                                                                                              |
 
 The data that gets passed to the `outputWriter` function looks like this:
 
@@ -72,10 +72,9 @@ The data that gets passed to the `outputWriter` function looks like this:
 Here's an example `webpack.config.js` file that uses all options:
 
 ```js
+const path = require("path");
 const LicenseCheckerWebpackPlugin = require("license-checker-webpack-plugin");
 const template = require("lodash.template");
-
-const customTemplate = templaet(readFileSync("customTemplate.ejs"));
 
 module.exports = {
   // ...
@@ -89,7 +88,7 @@ module.exports = {
         "querystring-es3@0.2.1": { licenseName: "MIT" }
       },
       emitError: true,
-      outputWriter: data => customTemplate(data),
+      outputWriter: path.resolve(__dirname, "customTemplate.ejs"),
       outputFilename: "ThirdPartyNotices.txt"
     })
   ]

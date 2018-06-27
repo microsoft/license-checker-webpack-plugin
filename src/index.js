@@ -4,23 +4,26 @@ const {
   getLicenseViolations,
   getSortedLicenseInformation,
   ignoreLicenses,
-  overrideLicenses
+  overrideLicenses,
+  writeLicenseInformation
 } = require("./licenseUtils");
-const defaultOutputWriter = require("./defaultOutputWriter");
+const { getOptions } = require("./optionsUtils");
 
 class LicenseCheckerWebpackPlugin {
   constructor(options) {
-    this.filter = options.filter || /(^.*\/node_modules\/((?:@[^/]+\/)?(?:[^/]+)))/;
-    this.allow = options.allow || "(Apache-2.0 OR BSD-2-Clause OR BSD-3-Clause OR MIT)";
-    this.ignore = options.ignore || {};
-    this.override = options.override || {};
-    this.emitError = options.emitError || false;
-    this.outputWriter = options.outputWriter || defaultOutputWriter;
-    this.outputFilename = options.outputFilename || "ThirdPartyNotices.txt";
+    this.options = getOptions(options);
   }
 
   apply(compiler) {
-    const { filter, allow, ignore, override, emitError, outputFilename, outputWriter } = this;
+    const {
+      filter,
+      allow,
+      ignore,
+      override,
+      emitError,
+      outputFilename,
+      outputWriter
+    } = this.options;
 
     compiler.hooks.emit.tapPromise("LicenseCheckerWebpackPlugin", async compilation => {
       let licenseInformation = getLicenseInformationForCompilation(compilation, filter);
@@ -35,7 +38,9 @@ class LicenseCheckerWebpackPlugin {
       }
 
       const sortedLicenseInformation = getSortedLicenseInformation(licenseInformation);
-      compilation.assets[outputFilename] = new RawSource(outputWriter(sortedLicenseInformation));
+      compilation.assets[outputFilename] = new RawSource(
+        writeLicenseInformation(outputWriter, sortedLicenseInformation)
+      );
     });
   }
 }

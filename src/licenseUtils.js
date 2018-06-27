@@ -1,4 +1,5 @@
 const { existsSync, readFileSync } = require("fs");
+const template = require("lodash.template");
 const satisfiesGlob = require("minimatch");
 const { satisfies: isSatisfiedVersion } = require("semver");
 const isValidLicense = require("spdx-expression-validate");
@@ -101,10 +102,18 @@ const overrideLicenses = (licenseInformation, override) => {
   );
 };
 
+const writeLicenseInformation = (outputWriter, dependencies) => {
+  if (typeof outputWriter === "string") {
+    outputWriter = template(readFileSync(outputWriter));
+  }
+  return outputWriter({ dependencies });
+};
+
 module.exports = {
   getLicenseInformationForCompilation,
   getLicenseViolations,
   getSortedLicenseInformation,
   ignoreLicenses,
-  overrideLicenses
+  overrideLicenses,
+  writeLicenseInformation
 };

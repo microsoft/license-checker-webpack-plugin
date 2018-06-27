@@ -1,9 +1,5 @@
-const { readFileSync } = require("fs");
 const { resolve } = require("path");
 
-const template = require("lodash.template");
-
-const defaultLicenseTemplate = readFileSync(resolve(__dirname, "./defaultOutputTemplate.ejs"));
-const defaultLicenseWriter = dependencies => template(defaultLicenseTemplate)({ dependencies });
+const defaultLicenseWriter = resolve(__dirname, "./defaultOutputTemplate.ejs");
 
 module.exports = defaultLicenseWriter;
