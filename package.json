@@ -32,7 +32,8 @@
     "semver": "^5.5.0",
     "spdx-expression-validate": "^1.0.2",
     "spdx-satisfies": "^4.0.0",
-    "webpack-sources": "^1.1.0"
+    "webpack-sources": "^1.1.0",
+    "wrap-ansi": "^3.0.1"
   },
   "devDependencies": {
     "eslint": "^5.0.1",

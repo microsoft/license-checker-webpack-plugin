@@ -1,25 +1,21 @@
-const { existsSync, readFileSync } = require("fs");
+const { readFileSync } = require("fs");
+const { resolve } = require("path");
+const glob = require("glob");
 const template = require("lodash.template");
 const satisfiesGlob = require("minimatch");
 const { satisfies: isSatisfiedVersion } = require("semver");
 const isValidLicense = require("spdx-expression-validate");
 const isSatisfiedLicense = require("spdx-satisfies");
+const wrap = require("wrap-ansi");
 const LicenseError = require("./LicenseError");
 
-const licenseFilenames = [
-  "LICENSE",
-  "LICENSE.md",
-  "LICENSE.txt",
-  "license",
-  "license.md",
-  "license.txt"
-];
+const licenseGlob = "LICENSE*";
+const licenseWrap = 80;
 
 const getLicenseContents = dependencyPath => {
-  const licenseFilename = licenseFilenames.find(licenseFilename =>
-    existsSync(`${dependencyPath}/${licenseFilename}`)
-  );
-  return licenseFilename && readFileSync(`${dependencyPath}/${licenseFilename}`).toString();
+  const [licenseFilename] = glob.sync(licenseGlob, { cwd: dependencyPath, nocase: true });
+  const licensePath = licenseFilename && resolve(dependencyPath, licenseFilename);
+  return licensePath && wrap(readFileSync(licensePath).toString(), licenseWrap);
 };
 
 const getLicenseInformationForDependency = dependencyPath => {
