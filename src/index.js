@@ -39,7 +39,7 @@ class LicenseCheckerWebpackPlugin {
 
       const sortedLicenseInformation = getSortedLicenseInformation(licenseInformation);
       compilation.assets[outputFilename] = new RawSource(
-        writeLicenseInformation(outputWriter, sortedLicenseInformation)
+        await writeLicenseInformation(outputWriter, sortedLicenseInformation)
       );
     });
   }
