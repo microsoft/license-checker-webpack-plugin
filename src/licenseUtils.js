@@ -18,6 +18,15 @@ const getLicenseContents = dependencyPath => {
   return licensePath && wrap(readFileSync(licensePath).toString(), licenseWrap);
 };
 
+const getLicenseName = package => {
+    if (package.licenses) {
+        const licenseName = package.licenses.map(license => license.type).join(" OR ");
+        return package.licenses.length > 1 ? `(${licenseName})` : licenseName;
+    }
+
+    return package.license;
+}
+
 const getLicenseInformationForDependency = dependencyPath => {
   const package = require(`${dependencyPath}/package.json`);
   return {
@@ -25,7 +34,7 @@ const getLicenseInformationForDependency = dependencyPath => {
     version: package.version,
     author: (package.author && package.author.name) || package.author,
     repository: (package.repository && package.repository.url) || package.repository,
-    licenseName: package.license,
+    licenseName: getLicenseName(package),
     licenseText: getLicenseContents(dependencyPath)
   };
 };
