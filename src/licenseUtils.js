@@ -18,23 +18,34 @@ const getLicenseContents = dependencyPath => {
   return licensePath && wrap(readFileSync(licensePath).toString(), licenseWrap);
 };
 
-const getLicenseName = package => {
-    if (package.licenses) {
-        const licenseName = package.licenses.map(license => license.type).join(" OR ");
-        return package.licenses.length > 1 ? `(${licenseName})` : licenseName;
-    }
-
-    return package.license;
-}
+const getLicenseName = pkg => {
+  // Valid license formats are an SPDX string expression
+  // https://www.npmjs.com/package/spdx
+  if (typeof pkg.license === "string") {
+    return pkg.license;
+  }
+  // Check for deprecated licence formats
+  // https://docs.npmjs.com/files/package.json#license
+  if (typeof pkg.license === "object") {
+    return pkg.license.type || "";
+  }
+  if (pkg.licenses && Array.isArray(pkg.licenses)) {
+    const licenseName = pkg.licenses.map(license => license.type).join(" OR ");
+    // Return the list of licenses as a composite license expression
+    return pkg.licenses.length > 1 ? `(${licenseName})` : licenseName;
+  }
+  // Fall-back to an empty string and let the validation handle the error.
+  return "";
+};
 
 const getLicenseInformationForDependency = dependencyPath => {
-  const package = require(`${dependencyPath}/package.json`);
+  const pkg = require(`${dependencyPath}/package.json`);
   return {
-    name: package.name,
-    version: package.version,
-    author: (package.author && package.author.name) || package.author,
-    repository: (package.repository && package.repository.url) || package.repository,
-    licenseName: getLicenseName(package),
+    name: pkg.name,
+    version: pkg.version,
+    author: (pkg.author && pkg.author.name) || pkg.author,
+    repository: (pkg.repository && pkg.repository.url) || pkg.repository,
+    licenseName: getLicenseName(pkg),
     licenseText: getLicenseContents(dependencyPath)
   };
 };
@@ -115,6 +126,7 @@ const writeLicenseInformation = (outputWriter, dependencies) => {
 };
 
 module.exports = {
+  getLicenseName,
   getLicenseInformationForCompilation,
   getLicenseViolations,
   getSortedLicenseInformation,
