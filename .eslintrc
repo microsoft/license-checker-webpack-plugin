@@ -3,10 +3,11 @@
     "ecmaVersion": 2017
   },
   "env": {
+    "jest": true,
     "node": true
   },
-  "extends": "eslint:recommended",
-  "plugins": ["prettier"],
+  "extends": ["eslint:recommended", "plugin:jest/recommended", "prettier"],
+  "plugins": ["jest", "prettier"],
   "rules": {
     "prettier/prettier": "error"
   }
