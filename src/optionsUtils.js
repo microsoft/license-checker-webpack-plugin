@@ -4,7 +4,7 @@ const defaultOutputWriter = require("./defaultOutputWriter");
 
 const optionsSchema = Joi.object().keys({
   filter: Joi.object()
-    .type(RegExp)
+    .instance(RegExp)
     .required(),
   allow: Joi.string().required(),
   ignore: Joi.array()
@@ -31,7 +31,7 @@ const defaultOptions = {
 const getOptions = options => {
   const finalOptions = Object.assign({}, defaultOptions, options);
 
-  const result = Joi.validate(finalOptions, optionsSchema);
+  const result = optionsSchema.validate(finalOptions);
   if (result.error != null) {
     throw result.error;
   }
