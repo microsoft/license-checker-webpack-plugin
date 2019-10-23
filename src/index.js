@@ -38,6 +38,7 @@ class LicenseCheckerWebpackPlugin {
       }
 
       const sortedLicenseInformation = getSortedLicenseInformation(licenseInformation);
+      // eslint-disable-next-line require-atomic-updates
       compilation.assets[outputFilename] = new RawSource(
         await writeLicenseInformation(outputWriter, sortedLicenseInformation)
       );
