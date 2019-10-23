@@ -24,23 +24,23 @@
     "webpack": "^4.0.0"
   },
   "dependencies": {
-    "@hapi/joi": "^16.1.2",
+    "@hapi/joi": "^16.1.7",
     "lodash.template": "^4.5.0",
     "minimatch": "^3.0.4",
     "semver": "^6.3.0",
     "spdx-expression-validate": "^2.0.0",
     "spdx-satisfies": "^5.0.0",
     "webpack-sources": "^1.4.3",
-    "wrap-ansi": "^6.0.0"
+    "wrap-ansi": "^6.1.0"
   },
   "devDependencies": {
-    "eslint": "^6.4.0",
-    "eslint-config-prettier": "^6.3.0",
+    "eslint": "^6.5.1",
+    "eslint-config-prettier": "^6.4.0",
     "eslint-formatter-pretty": "^2.1.1",
     "eslint-plugin-prettier": "^3.1.1",
-    "eslint-plugin-jest": "^22.17.0",
+    "eslint-plugin-jest": "^22.20.0",
     "jest": "^24.9.0",
-    "jest-runner-eslint": "^0.7.4",
+    "jest-runner-eslint": "^0.7.5",
     "prettier": "^1.18.2",
     "webpack": "^4.39.3"
   }
