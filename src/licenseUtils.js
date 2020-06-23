@@ -13,7 +13,7 @@ const licenseGlob = "LICENSE*";
 const licenseWrap = 80;
 
 const getLicenseContents = dependencyPath => {
-  const [licenseFilename] = glob.sync(licenseGlob, { cwd: dependencyPath, nocase: true });
+  const [licenseFilename] = glob.sync(licenseGlob, { cwd: dependencyPath, nocase: true, nodir: true });
   const licensePath = licenseFilename && resolve(dependencyPath, licenseFilename);
   return licensePath && wrap(readFileSync(licensePath).toString(), licenseWrap);
 };
