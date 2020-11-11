@@ -25,6 +25,7 @@
   },
   "dependencies": {
     "@hapi/joi": "^16.1.7",
+    "glob": "^7.1.6",
     "lodash.template": "^4.5.0",
     "minimatch": "^3.0.4",
     "semver": "^6.3.0",
