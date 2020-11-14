@@ -24,13 +24,13 @@
     "webpack": "^4.0.0"
   },
   "dependencies": {
-    "@hapi/joi": "^16.1.7",
     "glob": "^7.1.6",
     "lodash.template": "^4.5.0",
     "minimatch": "^3.0.4",
     "semver": "^6.3.0",
     "spdx-expression-validate": "^2.0.0",
     "spdx-satisfies": "^5.0.0",
+    "superstruct": "^0.10.12",
     "webpack-sources": "^1.4.3",
     "wrap-ansi": "^6.1.0"
   },

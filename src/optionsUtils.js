@@ -1,21 +1,34 @@
-const Joi = require("@hapi/joi");
+const {
+  array,
+  assert,
+  boolean,
+  instance,
+  object,
+  partial,
+  record,
+  string,
+  union
+} = require("superstruct");
 
 const defaultOutputWriter = require("./defaultOutputWriter");
 
-const optionsSchema = Joi.object().keys({
-  filter: Joi.object()
-    .instance(RegExp)
-    .required(),
-  allow: Joi.string().required(),
-  ignore: Joi.array()
-    .items(Joi.string())
-    .required(),
-  override: Joi.object().required(),
-  emitError: Joi.boolean().required(),
-  outputWriter: Joi.alternatives()
-    .try(Joi.string(), Joi.func())
-    .required(),
-  outputFilename: Joi.string().required()
+const optionsSchema = object({
+  filter: instance(RegExp),
+  allow: string(),
+  ignore: array(string()),
+  override: record(
+    string(),
+    partial({
+      name: string(),
+      version: string(),
+      repository: string(),
+      licenseName: string(),
+      licenseText: string()
+    })
+  ),
+  emitError: boolean(),
+  outputWriter: union([string(), instance(Function)]),
+  outputFilename: string()
 });
 
 const defaultOptions = {
@@ -31,10 +44,7 @@ const defaultOptions = {
 const getOptions = options => {
   const finalOptions = Object.assign({}, defaultOptions, options);
 
-  const result = optionsSchema.validate(finalOptions);
-  if (result.error != null) {
-    throw result.error;
-  }
+  assert(finalOptions, optionsSchema);
 
   return finalOptions;
 };
