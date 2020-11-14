@@ -21,7 +21,7 @@
     "test": "jest --projects jest.*.config.js"
   },
   "peerDependencies": {
-    "webpack": "^4.0.0"
+    "webpack": "^4.4.0 || ^5.4.0"
   },
   "dependencies": {
     "glob": "^7.1.6",
@@ -43,6 +43,6 @@
     "jest": "^24.9.0",
     "jest-runner-eslint": "^0.7.5",
     "prettier": "^1.18.2",
-    "webpack": "^4.39.3"
+    "webpack": "^5.4.0"
   }
 }
