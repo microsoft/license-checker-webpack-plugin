@@ -1,4 +1,4 @@
-const { getLicenseName } = require("./licenseUtils");
+const { getLicenseName, getLicenseContents } = require("./licenseUtils");
 
 describe("getLicenseName", () => {
   let pkg;
@@ -58,6 +58,33 @@ describe("getLicenseName", () => {
 
     it("should return empty string", () => {
       expect(licenseName).toBe("");
+    });
+  });
+});
+
+describe("getLicenseContents", () => {
+  let licenseContent;
+  let depPath;
+
+  describe("with licen(s)e file", () => {
+    beforeEach(() => {
+      depPath = process.cwd() + "/src/__mocks__/module-with-license/";
+      licenseContent = getLicenseContents(depPath);
+    });
+
+    it("should return text content", () => {
+      expect(licenseContent).not.toBe(undefined);
+    });
+  });
+
+  describe("with licen(c)e file", () => {
+    beforeEach(() => {
+      depPath = process.cwd() + "/src/__mocks__/module-with-licence/";
+      licenseContent = getLicenseContents(depPath);
+    });
+
+    it("should return text content", () => {
+      expect(licenseContent).not.toBe(undefined);
     });
   });
 });
