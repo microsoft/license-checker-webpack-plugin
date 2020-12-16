@@ -9,7 +9,7 @@ const isSatisfiedLicense = require("spdx-satisfies");
 const wrap = require("wrap-ansi");
 const LicenseError = require("./LicenseError");
 
-const licenseGlob = "LICENSE*";
+const licenseGlob = "LICEN@(C|S)E*";
 const licenseWrap = 80;
 
 const getLicenseContents = dependencyPath => {
@@ -131,6 +131,7 @@ const writeLicenseInformation = (outputWriter, dependencies) => {
 
 module.exports = {
   getLicenseName,
+  getLicenseContents,
   getLicenseInformationForCompilation,
   getLicenseViolations,
   getSortedLicenseInformation,
