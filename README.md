@@ -38,7 +38,7 @@ module.exports = {
 | `override`       | `object`               | `{}`                                                       | Object of dependencies to override, in the format `{"<dependency name>@<version range>": { ... }}`. For example, `{"assignment@^2.0.0": { licenseName: "MIT" }}`. |
 | `emitError`      | `boolean`              | `false`                                                    | Whether to emit errors instead of warnings.                                                                                                                       |
 | `outputWriter`   | `string` or `function` | See [`defaultOutputWriter`](./src/defaultOutputWriter.js). | Path to a `.ejs` template, or function that will generate the contents of the third-party notices file.                                                           |
-| `outputFilename` | `string`               | `"ThirdPartyNotices.txt"`                                  | Name of the third-party notices file with all licensing information.                                                                                              |
+| `outputFilename` | `string`               | `"ThirdPartyNotice.txt"`                                   | Name of the third-party notices file with all licensing information.                                                                                              |
 
 The data that gets passed to the `outputWriter` function looks like this:
 
