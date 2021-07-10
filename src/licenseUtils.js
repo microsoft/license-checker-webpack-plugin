@@ -58,6 +58,10 @@ const getLicenseInformationForCompilation = (compilation, filter) => {
   const fileDependencies = Array.from(compilation.fileDependencies);
   return fileDependencies.reduce((memo, dependencyPath) => {
     const match = dependencyPath.match(filter);
+    if (dependencyPath.match(/@[\w|-]+$/)) {
+      // don't try to find package.json for the "scope" portion of scoped packages e.g. "@react-aria/package.json"
+      return memo;
+    }
     if (match) {
       const [, rootPath, dependencyName] = match;
       memo[dependencyName] = getLicenseInformationForDependency(rootPath);
