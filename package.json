@@ -12,20 +12,26 @@
     "type": "git",
     "url": "https://github.com/Microsoft/license-checker-webpack-plugin.git"
   },
+  "jest": {
+    "projects": [
+      "./jest.test.config.js",
+      "./jest.eslint.config.js"
+    ]
+  },
   "keywords": [
     "license",
     "webpack"
   ],
   "main": "src/index.js",
   "scripts": {
-    "test": "jest --projects jest.*.config.js"
+    "test": "jest"
   },
   "peerDependencies": {
     "webpack": "^4.4.0 || ^5.4.0"
   },
   "dependencies": {
     "glob": "^7.1.6",
-    "lodash.template": "^4.5.0",
+    "lodash": "^4.17.21",
     "minimatch": "^3.0.4",
     "semver": "^6.3.0",
     "spdx-expression-validate": "^2.0.0",
@@ -35,13 +41,13 @@
     "wrap-ansi": "^6.1.0"
   },
   "devDependencies": {
-    "eslint": "^6.5.1",
+    "eslint": "^8.56.0",
     "eslint-config-prettier": "^6.4.0",
     "eslint-formatter-pretty": "^2.1.1",
+    "eslint-plugin-jest": "^28.8.0",
     "eslint-plugin-prettier": "^3.1.1",
-    "eslint-plugin-jest": "^22.20.0",
-    "jest": "^24.9.0",
-    "jest-runner-eslint": "^0.7.5",
+    "jest": "^29.7.0",
+    "jest-runner-eslint": "^2.2.0",
     "prettier": "^1.18.2",
     "webpack": "^5.4.0"
   }
