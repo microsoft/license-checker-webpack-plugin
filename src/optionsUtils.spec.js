@@ -43,7 +43,7 @@ describe("getOptions", () => {
   it("should throw for unknown 'override' value property", () => {
     const options = { override: { "assignment@^2.0.0": { licenceName: "MIT" } } };
     expect(() => getOptions(options)).toThrowErrorMatchingInlineSnapshot(
-      `"Expected a value of type \`never\` for \`override.assignment@^2.0.0.licenceName\` but received \`\\"MIT\\"\`."`
+      `"Expected a value of type \`never\` for \`override.assignment@^2.0.0.licenceName\` but received \`"MIT"\`."`
     );
   });
 });
