@@ -1,7 +1,7 @@
 const { readFileSync } = require("fs");
 const { resolve } = require("path");
 const glob = require("glob");
-const template = require("lodash.template");
+const { template } = require("lodash");
 const satisfiesGlob = require("minimatch");
 const { satisfies: isSatisfiedVersion } = require("semver");
 const isValidLicense = require("spdx-expression-validate");

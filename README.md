@@ -74,7 +74,7 @@ Here's an example `webpack.config.js` file that uses all options:
 ```js
 const path = require("path");
 const LicenseCheckerWebpackPlugin = require("license-checker-webpack-plugin");
-const template = require("lodash.template");
+const { template } = require("lodash");
 
 module.exports = {
   // ...
