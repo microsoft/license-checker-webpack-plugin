@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Microsoft/license-checker-webpack-plugin.git"
+    "url": "https://github.com/microsoft/license-checker-webpack-plugin.git"
   },
   "keywords": [
     "license",
