@@ -1,7 +1,7 @@
 {
   "name": "license-checker-webpack-plugin",
   "description": "Verifies licenses of all external dependencies in a compilation, and outputs them to a file.",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "license": "MIT",
   "author": {
     "name": "Daniel Perez Alvarez",
@@ -25,7 +25,7 @@
   },
   "dependencies": {
     "glob": "^7.1.6",
-    "lodash.template": "^4.5.0",
+    "lodash": "^4.17.21",
     "minimatch": "^3.0.4",
     "semver": "^6.3.0",
     "spdx-expression-validate": "^2.0.0",
