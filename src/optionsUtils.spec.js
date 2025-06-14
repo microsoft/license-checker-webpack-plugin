@@ -47,3 +47,42 @@ describe("getOptions", () => {
     );
   });
 });
+
+describe("defaults behaviour", () => {
+  const { filter } = getOptions();
+
+  test.each([
+    // Modules are things under node_modules
+    ["/base/node_modules/a-proj/dist/index.js", ["/base/node_modules/a-proj", "a-proj"]],
+    ["/base/node_modules/a-proj/dist", ["/base/node_modules/a-proj", "a-proj"]],
+    ["/base/node_modules/a-proj", ["/base/node_modules/a-proj", "a-proj"]],
+    ["/base/node_modules", null],
+    ["/base", null],
+    ["/", null],
+    // Scoped names have two parts
+    ["/base/node_modules/@babel/runtime/", ["/base/node_modules/@babel/runtime", "@babel/runtime"]],
+    ["/base/node_modules/@babel", null],
+    // Modules can be nested and deepest is retrieved
+    [
+      "/base/node_modules/a-proj/node_modules/b-proj/index.js",
+      ["/base/node_modules/a-proj/node_modules/b-proj", "b-proj"]
+    ],
+    [
+      "/base/node_modules/@a/proj/node_modules/b-proj/index.js",
+      ["/base/node_modules/@a/proj/node_modules/b-proj", "b-proj"]
+    ],
+    [
+      "/base/node_modules/@a/proj/node_modules/@b/proj/src/index.mjs",
+      ["/base/node_modules/@a/proj/node_modules/@b/proj", "@b/proj"]
+    ],
+    [
+      "/base/node_modules/a-proj/node_modules/@b/proj/src/index.mjs",
+      ["/base/node_modules/a-proj/node_modules/@b/proj", "@b/proj"]
+    ],
+    // Backslashes are allowed as separators
+    ["C:\\No\\node_modules\\a-proj\\dist\\index.js", ["C:\\No\\node_modules\\a-proj", "a-proj"]]
+  ])("filter %#", (path, expected) => {
+    const result = filter.exec(path);
+    expect(result ? result.slice(1) : result).toEqual(expected);
+  });
+});
